@@ -1,0 +1,3 @@
+D:/AAAA/gitbase/Gitbase-wallet/app/.cxx/Debug/6m3nh621/arm64-v8a/CMakeFiles/keys.dir
+D:/AAAA/gitbase/Gitbase-wallet/app/.cxx/Debug/6m3nh621/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/AAAA/gitbase/Gitbase-wallet/app/.cxx/Debug/6m3nh621/arm64-v8a/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+D:/Blockchain/android_wallet/Gitbase-wallet/Gitbase-wallet/app/.cxx/Debug/2x3p2c30/armeabi-v7a/CMakeFiles/keys.dir
+D:/Blockchain/android_wallet/Gitbase-wallet/Gitbase-wallet/app/.cxx/Debug/2x3p2c30/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/Blockchain/android_wallet/Gitbase-wallet/Gitbase-wallet/app/.cxx/Debug/2x3p2c30/armeabi-v7a/CMakeFiles/rebuild_cache.dir

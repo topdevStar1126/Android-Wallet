@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bottom layer: gray background with rounded top corners -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#888"/> <!-- Gray background color -->
+            <corners android:topLeftRadius="8dp" android:topRightRadius="8dp"/> <!-- Rounded top corners -->
+        </shape>
+    </item>
+    <!-- Top layer: transparent stroke to maintain rounded corners appearance -->
+    <item android:right="2dp" android:left="2dp" android:top="2dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent"/> <!-- Transparent to maintain background color -->
+            <corners android:radius="8dp"/> <!-- Same radius as gray background for seamless look -->
+        </shape>
+    </item>
+</layer-list>

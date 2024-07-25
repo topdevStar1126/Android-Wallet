@@ -1,0 +1,1 @@
+D:\Blockchain\android_wallet\Gitbase-wallet\Gitbase-wallet\app\src\main\cpp\CMakeLists.txt

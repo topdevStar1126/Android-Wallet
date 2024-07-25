@@ -1,0 +1,7 @@
+[
+{
+  "directory": "D:/Blockchain/android_wallet/Gitbase-wallet/Gitbase-wallet/app/.cxx/Debug/2x3p2c30/x86",
+  "command": "C:\\Users\\pc\\AppData\\Local\\Android\\Sdk\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=i686-none-linux-android24 --sysroot=C:/Users/pc/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dkeys_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -DIFKEY=da3717f25f824cc1baa32d812386d93f -DOSKEY=... -DPSKEY=... -DASKEY=HFDDY5BNKGXBB82DE2G8S64C3C41B76PYI -DWCKEY=40c6071febfd93f4fe485c232a8a4cd9 -Wno-dev -fno-limit-debug-info  -fPIC -o CMakeFiles\\keys.dir\\keys.c.o -c D:\\Blockchain\\android_wallet\\Gitbase-wallet\\Gitbase-wallet\\app\\src\\main\\cpp\\keys.c",
+  "file": "D:\\Blockchain\\android_wallet\\Gitbase-wallet\\Gitbase-wallet\\app\\src\\main\\cpp\\keys.c"
+}
+]

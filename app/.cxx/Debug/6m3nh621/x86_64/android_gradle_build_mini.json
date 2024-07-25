@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "D:\\AAAA\\gitbase\\Gitbase-wallet\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\Aroma\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "D:\\AAAA\\gitbase\\Gitbase-wallet\\app\\.cxx\\Debug\\6m3nh621\\x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\Aroma\\AppData\\Local\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "D:\\AAAA\\gitbase\\Gitbase-wallet\\app\\.cxx\\Debug\\6m3nh621\\x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "keys::@6890427a1f51a3e7e1df": {
+      "artifactName": "keys",
+      "abi": "x86_64",
+      "output": "D:\\AAAA\\gitbase\\Gitbase-wallet\\app\\build\\intermediates\\cxx\\Debug\\6m3nh621\\obj\\x86_64\\libkeys.so",
+      "runtimeFiles": []
+    }
+  }
+}
