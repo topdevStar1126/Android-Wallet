@@ -41,7 +41,7 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
     private SharedPreferencesManager sharedPreferencesManager;
 
     private LinearLayout mainLayout;
-    private Switch oneSwitch, fiveSwitch, fifteenSwitch, thirtySwitch, oneHourSwitch;
+    private Switch neverSwtich, oneSwitch, fiveSwitch, fifteenSwitch, thirtySwitch, oneHourSwitch;
     private FunctionButtonBar functionBar;
     private InputView inputName;
     private Wallet wallet;
@@ -63,14 +63,33 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
         setContentView(R.layout.autolock_activity);
 
         mainLayout = findViewById(R.id.root_autolock_layout);
+        neverSwtich = findViewById(R.id.never_switch);
         oneSwitch = findViewById(R.id.one_switch);
         fiveSwitch = findViewById(R.id.five_switch);
         fifteenSwitch = findViewById(R.id.fifteen_switch);
         thirtySwitch = findViewById(R.id.thirty_switch);
         oneHourSwitch = findViewById(R.id.one_hour_switch);
 
-        oneSwitch.setChecked(true);
-        sharedPreferencesManager.putInt("autolock_time", 0);
+        switch (sharedPreferencesManager.getInt("autolock_time", 0)) {
+            case 0:
+                neverSwtich.setChecked(true);
+                break;
+            case 15000:
+                oneSwitch.setChecked(true);
+                break;
+            case 60 * 1000:
+                fiveSwitch.setChecked(true);
+                break;
+            case 3 * 60 * 10000:
+                fifteenSwitch.setChecked(true);
+                break;
+            case 6 * 60 * 10000:
+                thirtySwitch.setChecked(true);
+                break;
+            case 15 * 60 * 10000:
+                oneHourSwitch.setChecked(true);
+                break;
+        }
         setSwitchListeners();
         toolbar();
 
@@ -82,6 +101,13 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
     }
 
     private void setSwitchListeners() {
+        neverSwtich.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                sharedPreferencesManager.putInt("autolock_time", 0);
+                uncheckOtherSwitches(neverSwtich);
+                restartApp();
+            }
+        });
         oneSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 sharedPreferencesManager.putInt("autolock_time", 15000);
@@ -124,6 +150,9 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
     }
 
     private void uncheckOtherSwitches(Switch checkedSwitch) {
+        if (checkedSwitch != neverSwtich && neverSwtich.isChecked()) {
+            neverSwtich.setChecked(false);
+        }
         if (checkedSwitch != oneSwitch && oneSwitch.isChecked()) {
             oneSwitch.setChecked(false);
         }
@@ -158,7 +187,8 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
     }
 
     public void restartApp() {
-        showToast("Restart your app!!!");
+        showToast("Restarting app....");
+        System.exit(0);
     }
 }
 
