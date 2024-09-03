@@ -49,6 +49,7 @@ public class CredentialActivity extends BaseActivity
     private EditText passwordInputView;
     private MaterialButton psswrdBtn;
     private TokensService tokensService;
+    private int activity;
 
     SharedPreferencesManager sharedPreferencesManager;
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -66,6 +67,9 @@ public class CredentialActivity extends BaseActivity
         setContentView(R.layout.credential_activiy);
         passwordInputView = findViewById(R.id.password_view);
         psswrdBtn = findViewById(R.id.password_btn);
+
+        Intent intent = getIntent();
+        activity = intent.getIntExtra("activity", 10);
 
         sharedPreferencesManager = SharedPreferencesManager.getInstance(this);
 
@@ -96,6 +100,20 @@ public class CredentialActivity extends BaseActivity
 
     public void showToast(CharSequence msg) {
         Toast.makeText(getThisActivity(), msg, Toast.LENGTH_LONG).show();
+    }
+
+    @SuppressLint("MissingSuperCall")
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if(activity == 0) {
+            System.exit(0);
+        } else if(activity == 1) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            sharedPreferencesManager = SharedPreferencesManager.getInstance(this);
+            sharedPreferencesManager.putInt("home_cur_page", 23);
+
+            this.startActivity(intent);
+        }
     }
 
 }

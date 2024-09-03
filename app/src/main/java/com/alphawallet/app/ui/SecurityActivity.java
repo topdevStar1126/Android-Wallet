@@ -103,6 +103,7 @@ public class SecurityActivity extends BaseActivity implements StandardFunctionIn
                 if(!curPassword.isEmpty()){
                     Intent intent1 = new Intent(this, CredentialActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent1.putExtra("activity", 1);
                     sharedPreferencesManager.putBoolean("cred_flag", true);
                     startActivity(intent1);
                 }
@@ -111,6 +112,7 @@ public class SecurityActivity extends BaseActivity implements StandardFunctionIn
                 if(!curPin.isEmpty()){
                     Intent intent1 = new Intent(this, PinCodeConfirmActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent1.putExtra("activity", 1);
                     sharedPreferencesManager.putBoolean("cred_flag", true);
                     startActivity(intent1);
                 }

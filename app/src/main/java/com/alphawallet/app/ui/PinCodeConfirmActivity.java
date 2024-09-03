@@ -1,6 +1,7 @@
 package com.alphawallet.app.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,10 +10,16 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.alphawallet.app.R;
+import com.alphawallet.app.SharedPreferencesManager;
+
+import timber.log.Timber;
 
 public class PinCodeConfirmActivity extends BaseActivity {
     private EditText pinInputOrigin;
+    private int activity;
     private StringBuilder pinBuilder = new StringBuilder();
 
     @SuppressLint("MissingInflatedId")
@@ -22,6 +29,8 @@ public class PinCodeConfirmActivity extends BaseActivity {
         setContentView(R.layout.pincode_confirm);
 
         pinInputOrigin = findViewById(R.id.pin_input_origin);
+        Intent intent = getIntent();
+        activity = intent.getIntExtra("activity", 10);
 
         GridLayout numberPad = findViewById(R.id.number_pad);
         for (int i = 0; i < numberPad.getChildCount(); i++) {
@@ -76,6 +85,22 @@ public class PinCodeConfirmActivity extends BaseActivity {
         // Add your PIN validation logic here
         // For example, check if the PIN matches a pre-defined value
         return !TextUtils.isEmpty(pin) && pin.length() == 4;
+    }
+
+    @SuppressLint({"MissingSuperCall", "TimberArgCount"})
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        if(activity == 0) {
+            //Timber.e("secruuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuurity: ", activity);
+            System.exit(0);
+        } else if(activity == 1) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            sharedPreferencesManager = SharedPreferencesManager.getInstance(this);
+            sharedPreferencesManager.putInt("home_cur_page", 23);
+
+            this.startActivity(intent);
+        }
     }
 
     public void showToast(CharSequence msg) {

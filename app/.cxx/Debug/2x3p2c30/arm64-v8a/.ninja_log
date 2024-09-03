@@ -1,3 +1,3 @@
 # ninja log v5
-0	3344	7430282173672787	CMakeFiles/keys.dir/keys.c.o	b8bf981b4e06940d
-3346	3559	7430282175796877	D:/Blockchain/android_wallet/Gitbase-wallet/Gitbase-wallet/app/build/intermediates/cxx/Debug/2x3p2c30/obj/arm64-v8a/libkeys.so	44ef184c62b137b6
+1	98	7470204841697775	CMakeFiles/keys.dir/keys.c.o	b33e1c6259747893
+99	183	7470204842517338	D:/develope/Blockchain/new workspace/Android-Wallet/app/build/intermediates/cxx/Debug/2x3p2c30/obj/arm64-v8a/libkeys.so	26b802939824c377

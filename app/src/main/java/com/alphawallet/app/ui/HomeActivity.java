@@ -366,6 +366,7 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
                 if(!curPassword.isEmpty()){
                     Intent intent1 = new Intent(this, CredentialActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent1.putExtra("activity", 0);
                     sharedPreferencesManager.putBoolean("cred_flag", true);
                     startActivity(intent1);
                 }
@@ -374,6 +375,7 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
                 if(!curPin.isEmpty()){
                     Intent intent1 = new Intent(this, PinCodeConfirmActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent1.putExtra("activity", 0);
                     sharedPreferencesManager.putBoolean("cred_flag", true);
                     startActivity(intent1);
                 }
@@ -637,6 +639,10 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
 
         if(position == 22) {
             viewPager.setCurrentItem(TOKEN_SWAP.ordinal(), false);
+            sharedPreferencesManager.putInt("home_cur_page", 0);
+        }
+        if(position == 23) {
+            viewPager.setCurrentItem(SETTINGS.ordinal(), false);
             sharedPreferencesManager.putInt("home_cur_page", 0);
         }
         initViews();

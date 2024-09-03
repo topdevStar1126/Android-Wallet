@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -7,11 +8,6 @@
         android:background="#F5F5F5"
         android:orientation="vertical"
         android:padding="16dp">
-    <include
-            layout="@layout/layout_simple_toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/pin_instructions"
@@ -24,9 +20,6 @@
             android:textSize="24sp"
             android:layout_marginLeft="120dp"
             tools:ignore="HardcodedText" />
-
-
-
 
     <EditText
             android:id="@+id/pin_input_origin"
