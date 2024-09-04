@@ -1,5 +1,6 @@
 package com.alphawallet.app.ui;
-
+import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,12 +25,22 @@ import com.alphawallet.app.viewmodel.BaseViewModel;
 import com.alphawallet.app.widget.AWalletAlertDialog;
 import com.alphawallet.app.widget.SignTransactionDialog;
 
+import timber.log.Timber;
+
 public abstract class BaseActivity extends AppCompatActivity
 {
     public static AuthenticationCallback authCallback;
+    private Handler handler = new Handler();
+    private Runnable delayedCloseRunnable;
+    private boolean isInBackground = false;
+    private boolean isAppStarted = false;
 
     SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(this);
 
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isAppStarted = true;
+    }
     protected Toolbar toolbar()
     {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -209,11 +220,46 @@ public abstract class BaseActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         activityHandler.post(periodicUpdateRunnable);
+        isInBackground = false;
+        if (delayedCloseRunnable != null) {
+            handler.removeCallbacks(delayedCloseRunnable);
+        }
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        if (delayedCloseRunnable != null) {
+            handler.removeCallbacks(delayedCloseRunnable);
+        }
+    }
+    @SuppressLint("TimberArgCount")
+    private void startDelayedClose() {
+        if (delayedCloseRunnable != null) {
+            handler.removeCallbacks(delayedCloseRunnable);
+        }
+
+        delayedCloseRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (isInBackground) {
+                    finish(); // Close the activity
+                }
+            }
+        };
+        int delay_time = sharedPreferencesManager.getInt("autolock_time", 0);
+        Timber.e("delay_time123:      %s", delay_time);
+        if(delay_time != 0) {
+            Timber.e("delay_time456:      %s", delay_time);
+            handler.postDelayed(delayedCloseRunnable, delay_time);
+        }
     }
     @Override
     protected void onPause() {
         super.onPause();
         activityHandler.removeCallbacks(periodicUpdateRunnable);
+        isInBackground = true;
+        if (isAppStarted) {
+            startDelayedClose();
+        }
     }
 
     public boolean dispatchTouchEvent(MotionEvent event) {

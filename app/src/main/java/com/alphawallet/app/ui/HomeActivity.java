@@ -5,6 +5,7 @@ import static com.alphawallet.app.C.ADDED_TOKEN;
 import static com.alphawallet.app.C.RESET_WALLET;
 import static com.alphawallet.app.C.SHOW_BACKUP;
 import static com.alphawallet.app.entity.WalletPage.ACTIVITY;
+import static com.alphawallet.app.entity.WalletPage.BROWSER_HISTORY;
 import static com.alphawallet.app.entity.WalletPage.DAPP_BROWSER;
 import static com.alphawallet.app.entity.WalletPage.TOKEN_SWAP;
 import static com.alphawallet.app.entity.WalletPage.SETTINGS;
@@ -366,7 +367,6 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
                 if(!curPassword.isEmpty()){
                     Intent intent1 = new Intent(this, CredentialActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent1.putExtra("activity", 0);
                     sharedPreferencesManager.putBoolean("cred_flag", true);
                     startActivity(intent1);
                 }
@@ -375,7 +375,6 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
                 if(!curPin.isEmpty()){
                     Intent intent1 = new Intent(this, PinCodeConfirmActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent1.putExtra("activity", 0);
                     sharedPreferencesManager.putBoolean("cred_flag", true);
                     startActivity(intent1);
                 }
@@ -645,6 +644,11 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
             viewPager.setCurrentItem(SETTINGS.ordinal(), false);
             sharedPreferencesManager.putInt("home_cur_page", 0);
         }
+        if(position == 24) {
+            sharedPreferencesManager.putInt("dapp_browser_cur_value", 22);
+            viewPager.setCurrentItem(DAPP_BROWSER.ordinal(), false);
+            sharedPreferencesManager.putInt("home_cur_page", 0);
+        }
         initViews();
     }
 
@@ -709,6 +713,11 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
             case SETTINGS:
             {
                 showPage(SETTINGS);
+                return true;
+            }
+            case BROWSER_HISTORY:
+            {
+                showPage(BROWSER_HISTORY);
                 return true;
             }
             case ACTIVITY:
@@ -1329,6 +1338,15 @@ public class HomeActivity extends BaseNavigationActivity implements View.OnClick
                     else
                     {
                         return new SwapFragment();
+                    }
+                case BROWSER_HISTORY:
+                    if (CustomViewSettings.hideDappBrowser())
+                    {
+                        return new BaseFragment();
+                    }
+                    else
+                    {
+                        return new BrowserHistoryFragment();
                     }
                 case SETTINGS:
                     return new NewSettingsFragment();

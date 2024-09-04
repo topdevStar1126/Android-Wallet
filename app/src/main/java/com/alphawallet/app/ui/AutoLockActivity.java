@@ -74,19 +74,19 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
             case 0:
                 neverSwtich.setChecked(true);
                 break;
-            case 15000:
+            case 60000:
                 oneSwitch.setChecked(true);
                 break;
-            case 60 * 1000:
+            case 5 * 60000:
                 fiveSwitch.setChecked(true);
                 break;
-            case 3 * 60 * 10000:
+            case 15 * 60000:
                 fifteenSwitch.setChecked(true);
                 break;
-            case 6 * 60 * 10000:
+            case 30 * 60000:
                 thirtySwitch.setChecked(true);
                 break;
-            case 15 * 60 * 10000:
+            case 60 * 60000:
                 oneHourSwitch.setChecked(true);
                 break;
         }
@@ -110,7 +110,7 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
         });
         oneSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                sharedPreferencesManager.putInt("autolock_time", 15000);
+                sharedPreferencesManager.putInt("autolock_time", 60000);
                 uncheckOtherSwitches(oneSwitch);
                 restartApp();
             }
@@ -118,7 +118,7 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
 
         fiveSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                sharedPreferencesManager.putInt("autolock_time", 60 * 1000);
+                sharedPreferencesManager.putInt("autolock_time", 5 * 60000);
                 uncheckOtherSwitches(fiveSwitch);
                 restartApp();
             }
@@ -126,7 +126,7 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
 
         fifteenSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                sharedPreferencesManager.putInt("autolock_time", 3 * 60 * 1000);
+                sharedPreferencesManager.putInt("autolock_time", 15 * 60000);
                 uncheckOtherSwitches(fifteenSwitch);
                 restartApp();
             }
@@ -134,7 +134,7 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
 
         thirtySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                sharedPreferencesManager.putInt("autolock_time", 6 * 60 * 1000);
+                sharedPreferencesManager.putInt("autolock_time", 30 * 60000);
                 uncheckOtherSwitches(thirtySwitch);
                 restartApp();
             }
@@ -142,7 +142,7 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
 
         oneHourSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                sharedPreferencesManager.putInt("autolock_time", 15 * 60 * 1000);
+                sharedPreferencesManager.putInt("autolock_time", 60 * 60000);
                 uncheckOtherSwitches(oneHourSwitch);
                 restartApp();
             }
@@ -187,8 +187,8 @@ public class AutoLockActivity extends BaseActivity implements StandardFunctionIn
     }
 
     public void restartApp() {
-        showToast("Restarting app....");
-        System.exit(0);
+//        showToast("Restarting app....");
+//        System.exit(0);
     }
 }
 

@@ -140,29 +140,7 @@ public class App extends Application
     }
 
     private void handleInactivity() {
-        // Perform your action for inactivity here
-        Timber.e("iiiiiiiiiiiiiiiiiiiiiiiiiiiii\n");
-        boolean credential_flg = sharedPreferencesManager.getBoolean("cred_flag", false);
 
-        if(!credential_flg) {
-            if(sharedPreferencesManager.getInt("pass_kind", 10) == 0) {
-                String curPassword = sharedPreferencesManager.getString("cur_password", "");
-                if(!curPassword.isEmpty()){
-                    Intent intent = new Intent(this, CredentialActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    sharedPreferencesManager.putBoolean("cred_flag", true);
-                    startActivity(intent);
-                }
-            } else if(sharedPreferencesManager.getInt("pass_kind", 10) == 1) {
-                String curPin = sharedPreferencesManager.getString("cur_pincode", "");
-                if(!curPin.isEmpty()){
-                    Intent intent = new Intent(this, PinCodeConfirmActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    sharedPreferencesManager.putBoolean("cred_flag", true);
-                    startActivity(intent);
-                }
-            }
-        }
     }
     public void showToast(CharSequence msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();

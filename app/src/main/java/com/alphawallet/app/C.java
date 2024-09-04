@@ -267,7 +267,6 @@ public abstract class C {
         int SWAP_TIMEOUT_ERROR = 9;
     }
     public interface Key {
-
         String WALLET = "wallet";
         String TRANSACTION = "transaction";
         String TICKET_RANGE = "ticket_range";

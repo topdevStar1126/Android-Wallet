@@ -110,28 +110,25 @@ import timber.log.Timber;
 
 
 public class SwapFragment extends BaseFragment  {
-
     HomeViewModel viewModel;
     private String currentWalletAddress;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     private static Web3j web3;
     private BigDecimal gasUsdValue;
-
     SwapContractOnBSC swapContractOnBSC;
     SwapContractOnETH swapContractOnETH;
-
     private BigDecimal currentGasPrice;
-
     SharedPreferencesManager sharedPreferencesManager;
 
     private final static String RPC_URL_ETH = "https://mainnet.infura.io/v3/1b5defa8ed65495c943a0dfa74fd832c";
     private final static String RPC_URL_BSC = "https://bsc-dataseed.binance.org";
     private final static String ETH_ADDRESS = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
     private final static String BNB_ADDRESS = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
+    private final static String MATIC_ADDRESS = "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270";
     private final static String uniSwapV2Router_address = "0xf164fC0Ec4E93095b804a4795bBe1e041497b92a";
     private final static String pancakeSwapV2Router_address = "0x10ED43C718714eb63d5aA57B78B54704E256024E";
+    private final static String quickSwapV2Router_address = "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff";
     private final static String swapContractAddressOnBsc = "0x144A13c9e2B5481cFF90e7A1F819c937b0892933";
     private final static String swapContractAddressOnETH = "0x68b5f967f06b36046707411e7888F6A0EBE86e3D";
 
@@ -214,6 +211,9 @@ public class SwapFragment extends BaseFragment  {
         List<ChainDropdownItem> chain_items = new ArrayList<>();
         chain_items.add(new ChainDropdownItem(R.drawable.ic_token_eth, "Ethereum"));
         chain_items.add(new ChainDropdownItem(R.drawable.ic_icons_network_bsc, "BNB chain"));
+        chain_items.add(new ChainDropdownItem(R.drawable.ic_icons_polygon, "Polygon"));
+        chain_items.add(new ChainDropdownItem(R.drawable.ic_token_eth, "Arbitrum"));
+        chain_items.add(new ChainDropdownItem(R.drawable.ic_token_eth, "Ethereum"));
         ChainDropdownAdapter chain_adapter =
                 new ChainDropdownAdapter(requireContext(), R.layout.token_dropdown_item, chain_items);
         chain_spinner.setAdapter(chain_adapter);
@@ -747,7 +747,6 @@ public class SwapFragment extends BaseFragment  {
             } else {
                 web3 =  Web3j.build(new HttpService(RPC_URL_BSC));
             }
-
             try {
                 EthGasPrice ethGasPrice = web3.ethGasPrice().send();
                 return new BigDecimal(ethGasPrice.getGasPrice());
@@ -794,7 +793,6 @@ public class SwapFragment extends BaseFragment  {
                         }
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                     }

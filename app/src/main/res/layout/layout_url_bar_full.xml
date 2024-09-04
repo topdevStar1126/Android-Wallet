@@ -105,14 +105,35 @@
             android:layout_marginEnd="@dimen/small_12"
             android:ellipsize="end"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+                tools:ignore="ExtraText">
 
-            <ImageView
+            <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:padding="2dp"
+                    android:background="@drawable/tabs_rounded_border">
+
+            <TextView
+                    android:id="@+id/history_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Tabs"
+                    android:padding="5dp"
+                    tools:ignore="HardcodedText"
+                     android:background="@android:color/white" />
+            </FrameLayout>
+
+
+        <ImageView
                 android:id="@+id/home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_home"
                 app:tint="?colorControlNormal" />
+
         </LinearLayout>
 
     </RelativeLayout>

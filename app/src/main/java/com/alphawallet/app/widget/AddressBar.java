@@ -1,22 +1,29 @@
 package com.alphawallet.app.widget;
 
+import static androidx.core.content.ContextCompat.getSystemService;
 import static com.alphawallet.app.util.KeyboardUtils.showKeyboard;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebBackForwardList;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.alphawallet.app.R;
+import com.alphawallet.app.SharedPreferencesManager;
 import com.alphawallet.app.entity.DApp;
+import com.alphawallet.app.ui.HomeActivity;
 import com.alphawallet.app.ui.widget.adapter.DappBrowserSuggestionsAdapter;
 import com.alphawallet.app.ui.widget.entity.ItemClickListener;
 import com.alphawallet.app.util.DappBrowserUtils;
@@ -32,20 +39,20 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import timber.log.Timber;
 
 public class AddressBar extends MaterialToolbar implements ItemClickListener
 {
     private final int ANIMATION_DURATION = 100;
-
     private AutoCompleteTextView urlTv;
     private DappBrowserSuggestionsAdapter adapter;
     private AddressBarListener listener;
     private ImageView btnClear;
     private View layoutNavigation;
     private ImageView back;
+    private TextView history;
     private ImageView next;
     private ImageView home;
-
     @Nullable
     private Disposable disposable; // awallet://openURL?https%3A%2F%2Fsmart-layer.vercel.app
     private boolean focused;
@@ -105,6 +112,7 @@ public class AddressBar extends MaterialToolbar implements ItemClickListener
     {
         urlTv = findViewById(R.id.url_tv);
         home = findViewById(R.id.home);
+        history = findViewById(R.id.history_list);
         if (home != null) home.setOnClickListener(v -> {
             disableNavigationButtons();
             WebBackForwardList backForwardList = listener.onHomePagePressed();
@@ -130,6 +138,14 @@ public class AddressBar extends MaterialToolbar implements ItemClickListener
             WebBackForwardList backForwardList = listener.loadNext();
             updateNavigationButtons(backForwardList);
         });
+        
+        history.setOnClickListener(v -> {
+            Intent intent = new Intent(this.getContext(), HomeActivity.class);
+            SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(this.getContext());
+            sharedPreferencesManager.putInt("home_cur_page", 24);
+
+            this.getContext().startActivity(intent);
+        });
     }
 
     private void clearAddressBar()
@@ -153,7 +169,7 @@ public class AddressBar extends MaterialToolbar implements ItemClickListener
         expandCollapseView(layoutNavigation, false);
 
         disposable = Observable.zip(
-                        Observable.interval(600, TimeUnit.MILLISECONDS).take(1),
+                        Observable.interval(100, TimeUnit.MILLISECONDS).take(1),
                         Observable.fromArray(btnClear), (interval, item) -> item)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -162,10 +178,12 @@ public class AddressBar extends MaterialToolbar implements ItemClickListener
 
     private void postBeginSearchSession(@NotNull ImageView item)
     {
+        Timber.e("site_list: %s", "SDKJFSD3");
         urlTv.setAdapter(adapter);
         urlTv.showDropDown();
         if (item.getVisibility() == View.GONE)
         {
+            Timber.e("site_list: %s", "SDKJFSD4");
             expandCollapseView(item, true);
             showKeyboard(urlTv);
         }

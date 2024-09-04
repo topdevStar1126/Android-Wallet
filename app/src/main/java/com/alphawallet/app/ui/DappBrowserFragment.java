@@ -121,6 +121,7 @@ import com.alphawallet.token.entity.SalesOrderMalformed;
 import com.alphawallet.token.entity.SignMessageType;
 import com.alphawallet.token.entity.Signable;
 import com.alphawallet.token.tools.ParseMagicLink;
+import com.alphawallet.app.SharedPreferencesManager;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -155,6 +156,7 @@ public class DappBrowserFragment extends BaseFragment implements OnSignTransacti
         OnWalletActionListener, URLLoadInterface, ItemClickListener, OnDappHomeNavClickListener, DappBrowserSwipeInterface,
         ActionSheetCallback, TestNetDialog.TestNetDialogCallback
 {
+    public  SharedPreferencesManager sharedPreferencesManager;
     public static final String SEARCH = "SEARCH";
     public static final String PERSONAL_MESSAGE_PREFIX = "\u0019Ethereum Signed Message:\n";
     public static final String CURRENT_FRAGMENT = "currentFragment";
@@ -302,8 +304,13 @@ public class DappBrowserFragment extends BaseFragment implements OnSignTransacti
     public void onResume()
     {
         super.onResume();
+        sharedPreferencesManager = SharedPreferencesManager.getInstance(getContext());
         homePressed = false;
         if (currentFragment == null) currentFragment = DAPP_BROWSER;
+        if (sharedPreferencesManager.getInt("dapp_browser_cur_value", 0) == 22) {
+            currentFragment = HISTORY;
+            sharedPreferencesManager.putInt("dapp_browser_cur_value", 0);
+        }
         attachFragment(currentFragment);
         if ((web3 == null || viewModel == null)) //trigger reload
         {
