@@ -3,6 +3,7 @@ package com.alphawallet.app.ui;
 import static com.alphawallet.app.ui.DappBrowserFragment.DAPP_CLICK;
 import static com.alphawallet.app.ui.DappBrowserFragment.DAPP_REMOVE_HISTORY;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,9 +118,13 @@ public class BrowserHistoryFragment extends BaseFragment
 
     private void setFragmentResult(String key, DApp dapp)
     {
-        Bundle result = new Bundle();
-        result.putParcelable(key, dapp);
-        getParentFragmentManager().setFragmentResult(DAPP_CLICK, result);
+//        Bundle result = new BundleBundle();
+//        result.putParcelable(key, dapp);
+//        getParentFragmentManager().setFragmentResult(DAPP_CLICK, result);
+        Intent intent = new Intent(getContext(), CustomBrowser.class);
+        intent.putExtra("url", dapp.getUrl());  // Add data to the Intent
+        this.startActivity(intent);
+        //getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Apply the animations
     }
 
     private List<DApp> getData()

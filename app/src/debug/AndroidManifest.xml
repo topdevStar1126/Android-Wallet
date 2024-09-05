@@ -39,6 +39,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.CredentialActivity" />
+        <activity android:name=".ui.CustomBrowser" />
         <activity android:name=".ui.SetPassword" />
         <activity android:name=".ui.SecurityActivity" />
         <activity android:name=".ui.AutoLockActivity" />

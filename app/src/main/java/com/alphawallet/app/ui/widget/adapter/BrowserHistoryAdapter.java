@@ -1,6 +1,7 @@
 package com.alphawallet.app.ui.widget.adapter;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -56,6 +57,7 @@ public class BrowserHistoryAdapter extends RecyclerView.Adapter<BrowserHistoryAd
         this.onHistoryItemRemovedListener = onHistoryItemRemovedListener;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setDapps(List<DApp> dapps) {
         this.data = dapps;
         notifyDataSetChanged();
